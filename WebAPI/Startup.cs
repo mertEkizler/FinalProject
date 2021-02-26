@@ -32,8 +32,8 @@ namespace WebAPI
             services.AddControllers();
             // singleton managerde data tutulmuyorsa kullanýlýr.
             //datalý AddTransient, AddScoped
-            services.AddSingleton<IProductService, ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService, ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
             //AOP - Autofac,Ninject,CastleWindsor, StructureMap, LightInject, DryInject --> IoC Container
         }
 
