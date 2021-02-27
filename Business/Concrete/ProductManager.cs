@@ -28,8 +28,9 @@ namespace Business.Concrete
             _productDal = productDal;
             _categoryService = categoryService;
         }
-
-
+        
+        //claim : admin editor vs
+        //[SecuredOperation("admin,editor")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
