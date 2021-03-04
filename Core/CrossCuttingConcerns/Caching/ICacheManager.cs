@@ -14,4 +14,3 @@ namespace Core.CrossCuttingConcerns.Caching
         void RemoveByPattern(string pattern);
     }
 }
-//1.25.37
