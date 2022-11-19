@@ -1,10 +1,7 @@
 ﻿using Business.Abstract;
-using Microsoft.AspNetCore.Http;
+using Castle.Core.Logging;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -12,20 +9,28 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        ICategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
+        private readonly ILogger _logger;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoriesController(
+            ICategoryService categoryService,
+            ILogger logger)
         {
-            _categoryService = categoryService;
+            _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            const string methodName = nameof(GetAll);
 
+            _logger.Trace($"[{methodName}] Getting categories.");
             var result = _categoryService.GetAll();
+
             if (result.Success)
             {
+                _logger.Trace($"[{methodName}] Returning results...");
                 return Ok(result);
             }
             return BadRequest(result);

@@ -1,35 +1,30 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects.Autofac;
-using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
-using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
-        IProductDal _productDal;
-        ICategoryService _categoryService;
+        private readonly IProductDal _productDal;
+        private readonly ICategoryService _categoryService;
         
         public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
-            _productDal = productDal;
-            _categoryService = categoryService;
+            _productDal = productDal ?? throw new ArgumentNullException(nameof(productDal));
+            _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
         }
         
         //claim : admin editor vs

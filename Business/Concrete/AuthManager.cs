@@ -4,18 +4,19 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using Entities.DTOs;
+using System;
 
 namespace Business.Concrete
 {
     public class AuthManager : IAuthService
     {
-        private IUserService _userService;
-        private ITokenHelper _tokenHelper;
+        private readonly IUserService _userService;
+        private readonly ITokenHelper _tokenHelper;
 
         public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
-            _userService = userService;
-            _tokenHelper = tokenHelper;
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _tokenHelper = tokenHelper ?? throw new ArgumentNullException(nameof(tokenHelper));
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
