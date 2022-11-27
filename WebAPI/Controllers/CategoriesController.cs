@@ -25,6 +25,8 @@ namespace WebAPI.Controllers
         {
             const string methodName = nameof(GetAll);
 
+            _logger.Trace($"[{methodName}] Invoked.");
+
             _logger.Trace($"[{methodName}] Getting categories.");
             var result = _categoryService.GetAll();
 

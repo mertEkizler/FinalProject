@@ -25,7 +25,9 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            const string methodName = nameof(GetAll); 
+            const string methodName = nameof(GetAll);
+
+            _logger.Trace($"[{methodName}] Invoked.");
 
             Thread.Sleep(500);
 
@@ -45,6 +47,8 @@ namespace WebAPI.Controllers
         {
             const string methodName = nameof(GetById);
 
+            _logger.Trace($"[{methodName}] Invoked.");
+
             _logger.Trace($"[{methodName}] Getting product with product ID: '{id}'.");
             var result = _productService.GetById(id);
 
@@ -61,6 +65,8 @@ namespace WebAPI.Controllers
         {
             const string methodName = nameof(GetByCategory);
 
+            _logger.Trace($"[{methodName}] Invoked.");
+
             _logger.Trace($"[{methodName}] Getting products with category ID: '{categoryId}'.");
             var result = _productService.GetAllByCategoryId(categoryId);
 
@@ -76,6 +82,8 @@ namespace WebAPI.Controllers
         public IActionResult Add(Product product)
         {
             const string methodName = nameof(Add);
+
+            _logger.Trace($"[{methodName}] Invoked.");
 
             _logger.Trace($"[{methodName}] Adding product {{@product}}.");
             var result = _productService.Add(product);
